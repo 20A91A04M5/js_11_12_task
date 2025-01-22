@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12/11/24-API's_task</title>
+    <style>
+        #cont{
+            display: grid;
+            grid-template-rows: auto auto auto auto;
+            grid-template-columns: auto auto auto auto;
+            
+        }
+    </style>
+</head>
+<body>
+    <p>1. fetch API using async and await and display it on a webpage using Dom methods.</p><br>
+    <p>Click on button</p>
+
+    <button id="butt">button</button>
+
+    <div id="cont"></div>
+    <script>
+        // let prod
+        // async function funn(para) {
+        //     prod=await fetch("https://fakestoreapi.com/products",{
+        //         method:"GET"
+        //     }).then(res=>res.json()).then(data=>console.log((data)))
+        // }funn()
+
+        let but=document.getElementById("butt")
+        but.addEventListener("click",()=>{
+            // alert("hii")
+            getdata()
+            
+        })
+
+        const getdata=async()=>{
+            try{
+                let res=await fetch("https://fakestoreapi.com/products")
+                data=await res.json()
+
+                    for(i of data){
+                        let conts=document.getElementById("cont")
+    
+                        let div=document.createElement("div")
+                        div.style.border="5px groove gold"
+    
+                        let ids=document.createElement("h1")
+                        ids.innerText=i.id
+                        ids.style.textAlign="center"
+                        div.appendChild(ids)
+    
+                        let imgs=document.createElement("img")
+                        imgs.setAttribute("src",i.image)
+                        imgs.setAttribute("id","im1")
+                        imgs.style.width="150px"
+                        imgs.style.height="150px"
+                        imgs.style.display="block"
+                        imgs.style.marginLeft="auto"
+                        imgs.style.marginRight="auto"
+                        div.appendChild(imgs)
+    
+                        let br1=document.createElement("br")
+                        div.appendChild(br1)
+    
+                        let titles=document.createElement("b")
+                        titles.innerText=i.title
+                        titles.style.width="200px"
+                        titles.style.marginLeft="auto"
+                        titles.style.marginRight="auto"
+                        titles.style.display="block"
+                        titles.style.color="blue"
+                        div.appendChild(titles)
+    
+                        let prices=document.createElement("p")
+                        prices.innerText=i.price+" $"
+                        prices.style.textAlign="center"
+                        prices.style.color="red"
+                        prices.style.fontSize="x-large"
+                        div.appendChild(prices)
+    
+                        conts.appendChild(div)
+                    }
+
+            }catch(err){
+                throw new Error("Error",err)
+            }
+        }
+        
+
+
+
+    </script>
+</body>
+</html>
